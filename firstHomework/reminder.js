@@ -13,8 +13,7 @@ Tasks:
 - Are reminders stored correctly?
 - Does the table render properly?
 - Are colors applied as expected?*/
-// Get references to DOM elements
-// Get elements
+
 
 // Get elements
 const titleInput = document.getElementById('title');
@@ -24,6 +23,7 @@ const descriptionInput = document.getElementById('description');
 const addButton = document.getElementById('addReminder');
 const showButton = document.getElementById('showReminders');
 const remindersTable = document.getElementById('remindersTable');
+const tableContainer = document.getElementById('remindersTable');
 
 // Array to store reminders
 const reminders = [];
@@ -36,8 +36,12 @@ addButton.addEventListener('click', function () {
     const description = descriptionInput.value.trim();
 
     // Validation
-    if (!title || !description) {
+    if (title.length === 0 || description.length === 0 || priority === 0) {
         alert('Please fill in all fields.');
+        return;
+    }
+    if (!title || !description || !priority || !color) {
+        alert('Please fill in all fields correctly.');
         return;
     }
 
@@ -63,6 +67,7 @@ addButton.addEventListener('click', function () {
     descriptionInput.value = '';
 
     alert('Reminder added!');
+    console.log(reminders);
 });
 
 // Show reminders
