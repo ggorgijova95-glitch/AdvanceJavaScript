@@ -1,0 +1,68 @@
+#header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+/* Page styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    padding: 20px;
+}
+
+/* Input containers */
+.divs {
+    margin-bottom: 10px;
+}
+
+/* Labels */
+label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="color"] {
+    padding: 6px;
+    width: 200px;
+}
+
+/* Buttons */
+button {
+    padding: 8px 14px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Table styling */
+table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th {
+    background-color: #e9ecef;
+    text-align: left;
+}
+
+th,
+td {
+    border: 1px solid #333;
+    padding: 8px;
+}
+
+/* Color preview cell */
+td:nth-child(3) {
+    width: 50px;
+}
