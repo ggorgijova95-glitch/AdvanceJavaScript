@@ -1,4 +1,4 @@
-
+$(document).ready(function () {
 $("#loadData").click(function () {
 
   $.ajax({
@@ -46,6 +46,7 @@ $("#loadCities").click(function () {
     $("#cityMessage").text("Something went wrong while fetching cities!");
     alert("Something went wrong while fetching cities!");
   }
+});
 });
 });
 
