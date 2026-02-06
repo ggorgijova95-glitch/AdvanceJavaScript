@@ -8,6 +8,10 @@ body {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  position: relative;
+  background-color: goldenrod;
+  border-radius: 20px;
+  border-color: red;
 }
 
 #dogContainer {
@@ -41,6 +45,7 @@ body {
   bottom: 20px;
   right: 20px;
   border-width: 10px;
-  border-color: red;
+  border-color:goldenrod;
+  border-radius: 10%;
   cursor: pointer;
 }
