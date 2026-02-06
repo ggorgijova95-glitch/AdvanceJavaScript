@@ -28,7 +28,7 @@ body {
 
 .dog-card img {
   width: 100%;
-  height: 200px;
+  height: 260px;
   object-fit: cover;
 }
 
@@ -40,4 +40,7 @@ body {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  border-width: 10px;
+  border-color: red;
+  cursor: pointer;
 }
