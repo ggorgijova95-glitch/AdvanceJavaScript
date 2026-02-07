@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars API</title>
+</head>
+<body>
+    <div class="task">
+<h4>Task 1: First 10 planets</h4>
+<p>Create an HTML page with a table and a button. When the button is clicked, show results for the first 10 planets from the Star Wars API. The information in the table should include:</p>
+* Planet Name
+* Population
+* Climate
+* Gravity
+
+**Requirements:**
+* There should be a function that makes the call to the API (the URL should be passed as a parameter).
+* There should be a function that prints planets into the table.
+
+**API URL:** https://swapi.py4e.com/api/planets/?page=1
+
+**AI Assistance Tips:**
+* Ask AI to explain how to fetch data from an API using JavaScript.
+* You can ask AI to generate the table structure or a sample fetch function, but **always review and test the code yourself**.
+* Validate that your table prints all 10 planets correctly and handles missing or null values.
+</p>
+</div>
+   <hr>
+   <div id="planetsTableContainer">
+   <table id="planetsTable" border="1"></table>
+   <br>
+   <button id="fetchButton">Fetch Planets</button>
+    </div>
+    <hr>
+<div class="task">
+    <h4>Task 2 – Pagination: NEXT / PREVIOUS 10 Planets</h4>
+    <p>
+After the user clicks the button to get the first 10 planets, a button should appear below the table labeled **NEXT 10**. When clicked:
+* Make another API call to get the next 10 planets.
+* Replace the table contents with the next 10 planets.
+
+After the NEXT 10 planets are shown:
+* The **NEXT 10** button should disappear.
+* A new **PREVIOUS 10** button should appear.
+* Clicking **PREVIOUS 10** should return the first 10 planets in the table.
+* The buttons should toggle visibility accordingly.
+
+**API URL:** https://swapi.py4e.com/api/planets/?page=2
+
+**AI Assistance Tips:**
+* Ask AI how to implement buttons that toggle and update table data.
+* AI can help suggest functions for handling pagination, but check the logic for correctness.
+* Test all scenarios: clicking NEXT, then PREVIOUS, and ensure the table updates correctly.</p>
+</div>
+   <script src="starWarsApi.js"></script>
+   <link rel="stylesheet" href="starWarsApi.css">
+</body>
+</html>
