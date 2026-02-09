@@ -1,44 +1,71 @@
-//get the table and button elements from the DOM
+// DOM elements
 let table = document.getElementById("planetsTable");
-let button = document.getElementById("fetchButton");
-//add a click event listener to the button to fetch data from the Star Wars API and populate the table
-button.addEventListener("click", function() {
-    fetch("https://swapi.py4e.com/api/planets?page=1")
-        .then(response => response.json())
-        .then(data => {
-            let planets = data.results;
-            
-            table.innerHTML = ""; // Clear existing table content
-            // Create header row
-            let headerRow = table.insertRow();
-            let nameHeader = headerRow.insertCell(0);
-            let populationHeader = headerRow.insertCell(1);
-            let climateHeader = headerRow.insertCell(2);
-            let gravityHeader = headerRow.insertCell(3);
-            nameHeader.textContent = nameHeader ? "Name" : "Name header not found";
-            populationHeader.textContent = populationHeader ? "Population" : "Population header not found";
-            climateHeader.textContent = climateHeader ? "Climate" : "Climate header not found";
-            gravityHeader.textContent = gravityHeader ? "Gravity" : "Gravity header not found";
-            // Loop through the planets and create a new row for each planet with its details
-            planets.forEach(planet => {
-                
-                let row = table.insertRow();
-                let nameCell = row.insertCell(0);
-                let populationCell = row.insertCell(1);
-                let climateCell = row.insertCell(2);
-                let gravityCell = row.insertCell(3);
+let fetchButton = document.getElementById("fetchButton");
+let nextButton = document.getElementById("nextButton");
+let prevButton = document.getElementById("prevButton");
 
-                nameCell.textContent = planet.name ? planet.name : "Name not found";
-                populationCell.textContent = planet.population ? planet.population : "Population not found";
-                climateCell.textContent = planet.climate ? planet.climate : "Climate not found";
-                gravityCell.textContent = planet.gravity ? planet.gravity : "Gravity not found";
+//let currentPage = 1;
 
-                
-            });
-            console.log(data)
-        })
-        .catch(error => {
-            alert("An error occurred while fetching data from the Star Wars API. Please try again later.");
-            console.error("Error fetching data from the Star Wars API:", error);
-        });
+/* 
+  ARROW FUNCTION
+  Used for main reusable logic
+*/
+const fetchPlanets = (url) => {
+  fetch(url)
+    .then(response => response.json())   // arrow
+    .then(data => printPlanets(data.results)) // arrow
+    .catch(error => {                    // arrow
+      alert("An error occurred while fetching data.");
+      console.error(error);
+    });
+};
+
+/*
+  ANONYMOUS FUNCTION
+  Used for DOM manipulation
+*/
+let printPlanets = function (planets) {
+  table.innerHTML = "";
+// Create header row with validation for missing data N/A (not available)
+  let headerRow = table.insertRow();
+  headerRow.insertCell(0).textContent = "Planet Name" ? "Planet Name" : "N/A";
+  headerRow.insertCell(1).textContent = "Population" ? "Population": "N/A";
+  headerRow.insertCell(2).textContent = "Climate" ? "Climate" : "N/A";
+  headerRow.insertCell(3).textContent = "Gravity" ? "Gravity" : "N/A";
+// Create data rows with validation for missing data N/A (not available)
+  planets.forEach(function (planet) { // anonymous
+    let row = table.insertRow();
+    row.insertCell(0).textContent = planet.name ? planet.name : "N/A";
+    row.insertCell(1).textContent = planet.population ? planet.population : "N/A";
+    row.insertCell(2).textContent = planet.climate ? planet.climate : "N/A";
+    row.insertCell(3).textContent = planet.gravity ? planet.gravity : "N/A";
+  });
+};
+
+/*
+  EVENT LISTENERS
+  Anonymous functions (classic & safe)
+*/
+fetchButton.addEventListener("click", function () {
+  //currentPage = 1;
+  fetchPlanets("https://swapi.py4e.com/api/planets/?page=1");
+  nextButton.style.display = "inline-block";
+  prevButton.style.display = "none";
+  
+});
+
+nextButton.addEventListener("click", function () {
+    //currentPage = 2;
+  fetchPlanets("https://swapi.py4e.com/api/planets/?page=2");
+
+  nextButton.style.display = "none";
+  prevButton.style.display = "inline-block";
+});
+
+prevButton.addEventListener("click", function () {
+  //currentPage = 1;
+  fetchPlanets("https://swapi.py4e.com/api/planets/?page=1");
+
+  prevButton.style.display = "none";
+  nextButton.style.display = "inline-block";
 });
