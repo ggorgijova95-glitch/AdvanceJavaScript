@@ -69,3 +69,32 @@ let vowelProducts = products
 
 console.log("Products starting with vowel and NOT on discount:");
 console.log(vowelProducts);
+
+// Helper function to build tables
+function buildTable(elementId, data, headers) {
+    let table = document.getElementById(elementId);
+    let html = "<tr>";
+
+    headers.forEach(h => html += `<th>${h}</th>`);
+    html += "</tr>";
+
+    data.forEach(row => {
+        html += "<tr>";
+        if (typeof row === "object" && !Array.isArray(row)) {
+            Object.values(row).forEach(val => html += `<td>${val}</td>`);
+        } else {
+            html += `<td>${row}</td>`;
+        }
+        html += "</tr>";
+    });
+
+    table.innerHTML = html;
+}
+
+// Build all tables
+buildTable("expensiveTable", expensiveProducts, ["Name", "Category", "Discount", "Price"]);
+buildTable("discountedFoodTable", discountedFoodNames, ["Food Name"]);
+buildTable("discountedPricesTable", discountedPrices, ["Price"]);
+buildTable("vowelProductsTable", vowelProducts, ["Name", "Price"]);
+
+
