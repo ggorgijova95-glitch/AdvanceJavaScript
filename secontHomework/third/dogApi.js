@@ -1,10 +1,11 @@
 $(document).ready(function() {
-    $("#loadDogs").click(function () {
-  $.ajax({
-    url: "https://dog.ceo/api/breed/hound/images",
-    method: "GET",
-    success: function (response) {
-      $("#dogContainer").empty();
+    $("#loadDogs").click(async function () {
+  try {
+    let response = await $.ajax({
+      url: "https://dog.ceo/api/breed/hound/images",
+      method: "GET"
+    });
+    $("#dogContainer").empty();
 
       response.message.forEach(function (imageUrl, index) {
         let card = $(`
@@ -16,8 +17,7 @@ $(document).ready(function() {
 
         $("#dogContainer").append(card);
       });
-    },
-    error: function () {
+    } catch (error) {
       alert("Error loading dog images 😢");
     }
   });
@@ -26,4 +26,3 @@ $("#topBtn").click(function () {
   window.scrollTo(0, 0);
 });
 
-});

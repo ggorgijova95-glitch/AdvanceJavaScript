@@ -1,52 +1,38 @@
 $(document).ready(function () {
-$("#loadData").click(function () {
-
-  $.ajax({
-    url: "https://pokeapi.co/api/v2/pokemon",
-    method: "GET",
-    success: function (response) {
+  $("#loadData").click(async function () {
+    try {
+      let response = await $.ajax({
+        url: "https://pokeapi.co/api/v2/pokemon",
+        method: "GET"
+      });
       let pokemons = response.results;
 
-      $("#list").empty(); // clear list before adding
-
-      for (let i = 0; i < 10; i++) {
-        $("#list").append(
-          `<li>${pokemons[i].name}</li>`
-        );
-        console.log(pokemons[i].name);
+      $("#list").empty();
+      for (let i = 0; i < 10 && i < pokemons.length; i++) {
+        $("#list").append(`<li>${pokemons[i].name}</li>`);
       }
-    },
-    error: function () {
+    } catch (error) {
       alert("Something went wrong!");
     }
   });
 
-});
+  $("#loadCities").click(async function () {
+    try {
+      let response = await $.ajax({
+        url: "https://api.openaq.org/v1/cities",
+        method: "GET"
+      });
+      let cities = response.results || [];
 
 
-$("#loadCities").click(function () {
-  $.ajax({
-  url: "https://api.openaq.org/v1/cities",
-  method: "GET",
-  mode: "no-cors",
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  },
-  success: function (response) {
-    let cities = response.results;
-
-    $("#cityList").empty(); // clear list before adding
-    for (let i = 0; i < 10; i++) {
-      $("#cityList").append(
-        `<li>${cities[i].city}</li>`
-      );
-    }
-  },
-  error: function () {
-    $("#cityMessage").text("Something went wrong while fetching cities!");
-    alert("Something went wrong while fetching cities!");
-  }
-});
-});
-});
+        $("#cityList").empty();
+        for (let i = 0; i < 10 && i < cities.length; i++) {
+          $("#cityList").append(`<li>${cities[i].city}</li>`);
+        }
+    } catch (error) {
+        $("#cityMessage").text("Something went wrong while fetching cities!");
+        
+      }
+    });
+  });
 

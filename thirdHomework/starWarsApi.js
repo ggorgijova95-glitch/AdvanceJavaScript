@@ -10,21 +10,28 @@ let prevButton = document.getElementById("prevButton");
   ARROW FUNCTION
   Used for main reusable logic
 */
-const fetchPlanets = (url) => {
-  fetch(url)
-    .then(response => response.json())   // arrow
-    .then(data => printPlanets(data.results)) // arrow
-    .catch(error => {                    // arrow
+
+const fetchPlanets = async (url) => {
+  try {
+    let response = await fetch(url);
+    let data = await response.json();
+    printPlanets(data.results);
+    console.log(data);
+  } catch (error) {                    // arrow
       alert("An error occurred while fetching data.");
       console.error(error);
-    });
+    }
+    finally {
+    // Optional cleanup or final actions can be performed here
+    console.log("Yey i know how to use async/await and try/catch/finally!");
+  }
 };
 
 /*
   ANONYMOUS FUNCTION
   Used for DOM manipulation
 */
-let printPlanets = function (planets) {
+let printPlanets =function (planets) {
   table.innerHTML = "";
 // Create header row with validation for missing data N/A (not available)
   let headerRow = table.insertRow();
@@ -46,26 +53,53 @@ let printPlanets = function (planets) {
   EVENT LISTENERS
   Anonymous functions (classic & safe)
 */
-fetchButton.addEventListener("click", function () {
+fetchButton.addEventListener("click",  async function () {
+  try {
   //currentPage = 1;
-  fetchPlanets("https://swapi.py4e.com/api/planets/?page=1");
+   let response = await fetchPlanets("https://swapi.py4e.com/api/planets/?page=1");
   nextButton.style.display = "inline-block";
   prevButton.style.display = "none";
-  
+  console.log(response);
+  } catch (error) {
+    alert("An error occurred while fetching data.");
+    console.error(error);
+  }
+  finally {
+    // Optional cleanup or final actions can be performed here
+    console.log("Yey i know how to use async/await and try/catch/finally!");
+  }
 });
 
-nextButton.addEventListener("click", function () {
+nextButton.addEventListener("click", async function () {
     //currentPage = 2;
-  fetchPlanets("https://swapi.py4e.com/api/planets/?page=2");
-
-  nextButton.style.display = "none";
-  prevButton.style.display = "inline-block";
+  try {
+    let response = await fetchPlanets("https://swapi.py4e.com/api/planets/?page=2");
+    nextButton.style.display = "none";
+    prevButton.style.display = "inline-block";
+    console.log(response);
+  } catch (error) {
+    alert("An error occurred while fetching data.");
+    console.error(error);
+  }
+  finally {
+    // Optional cleanup or final actions can be performed here
+    console.log("Yey i know how to use async/await and try/catch/finally!");
+  }
 });
 
-prevButton.addEventListener("click", function () {
+prevButton.addEventListener("click", async function () {
   //currentPage = 1;
-  fetchPlanets("https://swapi.py4e.com/api/planets/?page=1");
-
-  prevButton.style.display = "none";
-  nextButton.style.display = "inline-block";
+  try {
+    let response = await fetchPlanets("https://swapi.py4e.com/api/planets/?page=1");
+    prevButton.style.display = "none";
+    nextButton.style.display = "inline-block";
+    console.log(response);
+  } catch (error) {
+    alert("An error occurred while fetching data.");
+    console.error(error);
+  }
+  finally {
+    // Optional cleanup or final actions can be performed here
+    console.log("Yey i know how to use async/await and try/catch/finally!");
+  }
 });

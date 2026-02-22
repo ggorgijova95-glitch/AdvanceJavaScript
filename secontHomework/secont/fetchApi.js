@@ -1,12 +1,11 @@
 let button = document.getElementById("fetchButton");
 let table = document.getElementById("userTable");
 // Fetch user data from JSONPlaceholder API and display it in the table
-button.addEventListener("click", function () {
-    fetch(`https://jsonplaceholder.typicode.com/users/1`)
-    // Fetch the data and convert to JSON
-        .then(response => response.json())
-        .then(user => {
-            table.innerHTML = `
+button.addEventListener("click",async function () {
+    try {
+        let response = await fetch(`https://jsonplaceholder.typicode.com/users/1`);
+        let user = await response.json();
+        table.innerHTML = `
                 <tr>
                     <th>Name</th>
                     <th>Username</th>
@@ -31,8 +30,8 @@ button.addEventListener("click", function () {
             /*for (let key in user) {
                 console.log(`${key}: ${user[key]}`);
             }*/
-        })
-        .catch(error => {
+        }
+        catch(error) {
             console.error('Error fetching user data:', error);
-        });
-});
+        }
+    });
