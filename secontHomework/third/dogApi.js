@@ -18,7 +18,8 @@ $(document).ready(function() {
         $("#dogContainer").append(card);
       });
     } catch (error) {
-      alert("Error loading dog images 😢");
+      alert("Error loading dog images - please try again later.");
+      console.error(error);
     }
   });
 });
