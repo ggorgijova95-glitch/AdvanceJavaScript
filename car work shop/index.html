@@ -13,7 +13,7 @@
       <a class="btn btn-light nav-item" href="#">Cars</a>
     </div>
     <div class="navbar-right">
-      <input type="text" id="searchInput" class="form-control" placeholder="Search by brand or model...">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search by brand or type...">
       <button id="searchButton" class="btn btn-primary">Search</button>
     </div>
   </div>
@@ -26,6 +26,7 @@
     <div class="page" style="display:none;">
       <h1>Cars</h1>
       <h3 id="searchResultsTitle"></h3>
+      <p id="wrongInputMessage" style="display:none; color: red;">Please enter a valid search term.</p>
       <!-- Table -->
     <table class="table table-striped table-bordered" style="display:none;" id="carsTable">
     <thead class="table-dark">

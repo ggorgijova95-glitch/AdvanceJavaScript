@@ -63,24 +63,36 @@ async function fetchCars() {
 // initialize data on load
 fetchCars();
 
-// Search functionality
 function searchCars() {
   const query = document.getElementById('searchInput').value.trim().toLowerCase();
   const carsTable = document.getElementById('carsTable');
 
   if (!query) {
-    // show all cars if input is empty
-    renderTable(usersData);
-    carsTable.style.display = 'table';
+    // if input is empty, just clear the table and hide it
+    renderTable([]);
+    carsTable.style.display = 'none';
+    document.getElementById('wrongInputMessage').style.display = "block"; // show error message
     return;
+  } else {
+    document.getElementById('wrongInputMessage').style.display = "none";
   }
 
+  // filtering logic should run here
   const filteredCars = usersData.filter(car =>
-    car.brand.toLowerCase().includes(query) || car.model.toLowerCase().includes(query)
+    car.brand.toLowerCase().includes(query) || car.type.toLowerCase().includes(query)
   );
 
   renderTable(filteredCars);
-  carsTable.style.display = 'table'; // always show table
+
+ // show table only if results exist
+if (filteredCars.length > 0) {
+  carsTable.style.display = 'table';
+  document.getElementById('wrongInputMessage').style.display = "none"; 
+} else {
+  // length === 0
+  carsTable.style.display = 'none';
+  document.getElementById('wrongInputMessage').style.display = "block"; 
+}
 }
 
 // Wire up button

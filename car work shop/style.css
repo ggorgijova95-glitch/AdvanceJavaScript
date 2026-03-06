@@ -1,189 +1,225 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f9;
-    margin:0;
-}
-#navbar{
-    background-color:#00deee;
-    color:white;
-    padding:15px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom: 3px solid #0099bb;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+body {
+  background-image: url('CarWorkshopBackgro.png');
+  background-size: cover;       /* fills the screen */
+  background-position: center;  /* keeps it centered */
+  background-attachment: fixed; /* stays in place while scrolling */
+  color: #f5f5f5;               /* light text for contrast */
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.navbar-left {
-    display:flex;
-    gap:10px;
+/* NAVBAR */
+#navbar {
+  background-color: #111; /* base dark tone */
+  background-image: 
+    url('carbon-fiber-texture.png'), /* add your carbon fiber image here */
+    linear-gradient(135deg, #111 25%, #222 75%); /* fallback gradient */
+  background-size: 200px 200px, cover; /* texture tiling + gradient fill */
+  background-blend-mode: overlay; /* blend texture with gradient */
+  color: #f5f5f5;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #c00; /* red accent line */
+  box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+  font-family: 'Segoe UI', sans-serif;
 }
+
+.navbar-left h2 {
+  font-family: 'Impact', sans-serif;
+  letter-spacing: 2px;
+  color: #f5f5f5;
+  text-shadow: 1px 1px 4px #000;
+  margin: 0;
+}
+
 
 .navbar-right {
-    display:flex;
-    gap:10px;
-    align-items:center;
-}
-.btn-btn-light{
-    background-color:#fff;
-    color:#333;
-    border: 2px solid #00deee;
-    padding:8px 16px;
-    border-radius:8px;
-    cursor:pointer;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: inline-block;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.btn-btn-light:hover {
-    background-color:#0099bb;
-    color:#fff;
-    border-color:#0099bb;
-}
-
-/* Home and Cars buttons in navbar */
+/* Dashboard-style nav buttons */
 .btn.btn-light {
-    background-color:#fff;
-    color:#333;
-    border: 2px solid #0099bb;
-    padding:8px 16px;
-    border-radius:8px;
-    cursor:pointer;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: 500;
+  background-color: #fff;
+  color: #333;
+  border: 2px solid;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 600;
+  box-shadow: inset 0 -3px 0 #bb0303, 0 2px 4px rgba(0,0,0,0.3);
 }
 
+/* Hover effect: electric cyan glow */
 .btn.btn-light:hover {
-    background-color:#0099bb;
-    color:#fff;
-    border-color:#0099bb;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  background-color: #111;             /* darker background on hover */
+  color: #fff;
+  border-color: #ff0000;              /* cyan border */
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 12px #dc2906,       /* outer cyan glow */
+              inset 0 -3px 0 #f90000,
+              0 4px 8px rgba(0,0,0,0.6);
 }
 
-/* Active state for navigation items */
+/* Active state: fiery red glow */
 .btn.btn-light.active {
-    background-color:#0099bb;
-    color:#fff;
-    border-color:#0099bb;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  background-color: #cc0000;          /* deep red active */
+  color: #fff;
+  border-color: #cc0000;
+  box-shadow: 0 0 14px #ff3333,       /* glowing red effect */
+              inset 0 2px 4px rgba(0,0,0,0.4);
+  transform: scale(1.02);
 }
 
-.container{
-    width:90%;
-    margin:auto;
-    text-align:center;
+
+/* CONTAINER */
+.container {
+  width: 90%;
+  margin: auto;
+  text-align: center;
 }
 
-h1{
-    margin-top:30px;
-    color:#333;
+h1 {
+  margin-top: 30px;
+  color: #333;
 }
 
-.subtitle{
-    color:#666;
-    margin-bottom:20px;
+.subtitle {
+  color: #666;
+  margin-bottom: 20px;
 }
 
-.buttons{
-    margin-bottom:20px;
+.buttons {
+  margin-bottom: 20px;
 }
 
-button{
-    padding:10px 18px;
-    margin:5px;
-    border: 2px solid #005fa3;
-    border-radius:6px;
-    background-color:#007bff;
-    color:white;
-    cursor:pointer;
-    transition: all 0.3s;
+/* BUTTONS */
+/* SEARCH BUTTON */
+button {
+  padding: 10px 18px;
+  margin: 5px;
+  border: 2px solid #a30000;
+  border-radius: 6px;
+  background-color: #ff0000;          /* bold red base */
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4); /* subtle depth */
 }
 
-button:hover{
-    background-color:#0056b3;
+/* Hover glow effect */
+button:hover {
+  background-color: #cc0000;          /* deeper red */
+  border-color: #ff3333;
+  box-shadow: 0 0 12px #ff3333,       /* fiery glow */
+              inset 0 -3px 0 #660000,
+              0 4px 8px rgba(0,0,0,0.6);
+  transform: translateY(-2px) scale(1.05);
 }
 
-/* Search input styling */
+/* Active (clicked) state: glowing red */
+button:active {
+  background-color: #b30000;          /* darker red when pressed */
+  border-color: #ff1a1a;
+  box-shadow: 0 0 14px #ff1a1a,       /* glowing red effect */
+              inset 0 2px 4px rgba(0,0,0,0.5);
+  transform: scale(0.96);             /* pressed-down feel */
+}
+
+
+
+/* SEARCH INPUT */
+/* SEARCH INPUT */
 #searchInput {
-    width: 100%;
-    max-width: 300px;
-    padding: 8px 12px;
-    border: 2px solid #007bff;
-    border-radius: 4px;
-    margin-top: 5px;
-    transition: border-color 0.3s;
+  width: 100%;
+  max-width: 300px;
+  padding: 8px 12px;
+  border: 2px solid #444;              /* neutral border */
+  border-radius: 6px;
+  margin-top: 5px;
+  background-color: #111;              /* dark dashboard background */
+  color: #f5f5f5;
+  transition: all 0.3s ease;
 }
 
+/* Glow effect on focus */
 #searchInput:focus {
-    outline: none;
-    border-color: #0056b3;
-    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+  outline: none;
+  border-color: #ff3333 ;        /* neon green border */
+  box-shadow: 0 0 10px #ff3333,        /* glowing green effect */
+              inset 0 0 6px #ff3333;   /* subtle inner glow */
+  background-color: #000;              /* darker when active */
 }
 
-/* Table styling */
+
+
+/* TABLE */
 .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border: 2px solid #343a40;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 2px solid #343a40;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .table th, .table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
 }
 
 .table th {
-    background-color: #343a40;
-    color: #fff;
+  background-color: #343a40;
+  color: #fff;
 }
 
 .table tr:nth-child(even) {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .table tr:hover {
-    background-color: #e9ecef;
+  background-color: #e9ecef;
 }
 
-.cars-container{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap:20px;
+/* CAR CARDS */
+.cars-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
 }
 
-.car-card{
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    transition:0.3s;
+.car-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
 }
 
-.car-card:hover{
-    transform:translateY(-5px);
+.car-card:hover {
+  transform: translateY(-5px);
 }
 
-.car-card img{
-    width:100%;
-    height:150px;
-    object-fit:cover;
-    border-radius:6px;
+.car-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
 }
 
-.car-card h3{
-    margin:10px 0;
+.car-card h3 {
+  margin: 10px 0;
 }
 
-.car-card p{
-    color:#555;
-    margin:4px 0;
+.car-card p {
+  color: #555;
+  margin: 4px 0;
 }
