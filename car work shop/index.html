@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="container mt-5">
+ 
+  <div id="navbar">
+    <div class="navbar-left">
+      <a class="btn btn-light nav-item" href="#">Home</a>
+      <a class="btn btn-light nav-item" href="#">Cars</a>
+    </div>
+    <div class="navbar-right">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search by brand or model...">
+      <button id="searchButton" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+<!--pages-->
+<div id="pages">
+    <div class="page">
+      <h1>Car Workshop</h1>
+      <p>Welcome to our car workshop! We offer a wide range of services to keep your vehicle in top condition. Whether you need routine maintenance, repairs, or custom modifications, our skilled technicians are here to help. Contact us today to schedule an appointment and experience the best in automotive care.</p>
+    </div>
+    <div class="page" style="display:none;">
+      <h1>Cars</h1>
+      <h3 id="searchResultsTitle"></h3>
+      <!-- Table -->
+    <table class="table table-striped table-bordered" style="display:none;" id="carsTable">
+    <thead class="table-dark">
+      <tr>
+        <th>Type</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Doors</th>
+        <th>Gas Type</th>
+        <th>Color</th>
+        <th>New</th>
+        <th>Horsepower</th>
+      </tr>
+    </thead>
+    <tbody id="userTable"></tbody>
+    </table>
+    </div>
+</div>
+  
+<script src = "script.js"></script>
+<link rel = "stylesheet" href = "style.css">
+</body>
+</html>
