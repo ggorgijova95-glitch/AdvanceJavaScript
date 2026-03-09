@@ -39,7 +39,7 @@ function renderTable(cars) {
       <td>${car.doors}</td>
       <td>${car.gasType}</td>
       <td>${car.color}</td>
-      <td>${car.isNew}</td>
+      <td>${car.isNew ? "New" : "Used"}</td>
       <td>${car.horsepower}</td>
     `;
     tableBody.appendChild(row);
@@ -94,10 +94,41 @@ if (filteredCars.length > 0) {
   document.getElementById('wrongInputMessage').style.display = "block"; 
 }
 }
+function applyFilters() {
+
+  const model = document.getElementById("model").value.toLowerCase();
+  const doors = document.getElementById("doors").value;
+  const gasType = document.getElementById("gasType").value;
+  const color = document.getElementById("color").value.toLowerCase();
+  const condition = document.querySelector('input[name="condition"]:checked')?.value;
+  const horsepower = document.getElementById("horsepower").value;
+
+  const carsTable = document.getElementById("carsTable");
+
+  const filteredCars = usersData.filter(car => {
+
+    return (!model || car.model.toLowerCase().includes(model)) &&
+           (!doors || car.doors == doors) &&
+           (!gasType || car.gasType == gasType) &&
+           (!color || car.color.toLowerCase().includes(color)) &&
+           (!condition || (condition === "new" ? car.isNew : !car.isNew)) &&
+           (!horsepower || car.horsepower >= horsepower);
+
+  });
+
+  renderTable(filteredCars);
+
+  if(filteredCars.length > 0){
+      carsTable.style.display = "table";
+  }else{
+      carsTable.style.display = "none";
+  }
+
+}
 
 // Wire up button
 document.getElementById('searchButton').addEventListener('click', searchCars);
 
 // Optional: live search as you type
-document.getElementById('searchInput').addEventListener('input', searchCars);
-
+//document.getElementById('searchInput').addEventListener('input', searchCars);
+document.getElementById("filters")?.addEventListener("input", applyFilters);

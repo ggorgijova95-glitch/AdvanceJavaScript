@@ -45,6 +45,53 @@
     </table>
     </div>
 </div>
+<h2>Car Filters</h2>
+  <form id="filters">
+    <label>Brand: <input type="text" id="brand"></label><br>
+    <label>Model: <input type="text" id="model"></label><br>
+    <label>Doors: <input type="number" id="doors"></label><br>
+    <label>Gas Type:
+      <select id="gasType">
+        <option value="">Any</option>
+        <option value="petrol">Petrol</option>
+        <option value="diesel">Diesel</option>
+        <option value="electric">Electric</option>
+      </select>
+    </label><br>
+    <label>Color: <input type="text" id="color"></label><br>
+    <label>Condition:
+      <input type="radio" name="condition" value="" checked> Any
+      <input type="radio" name="condition" value="new"> New
+      <input type="radio" name="condition" value="old"> Old
+    </label><br>
+    <label>Horsepower (min): <input type="number" id="hpMin"></label>
+    <label>Horsepower (max): <input type="number" id="hpMax"></label><br>
+    <button type="button" onclick="applyFilters()">Apply Filters</button>
+  </form>
+
+  <h2>Available Cars</h2>
+  <div id="carList">
+    <div class="car" 
+         data-brand="BMW" data-model="X5" data-doors="4" 
+         data-gastype="diesel" data-color="white" 
+         data-condition="new" data-hp="300">
+      BMW X5 - 4 doors - Diesel - White - New - 300 HP
+    </div>
+    <div class="car" 
+         data-brand="Audi" data-model="A3" data-doors="4" 
+         data-gastype="petrol" data-color="black" 
+         data-condition="old" data-hp="150">
+      Audi A3 - 4 doors - Petrol - Black - Old - 150 HP
+    </div>
+    <div class="car" 
+         data-brand="BMW" data-model="M3" data-doors="2" 
+         data-gastype="petrol" data-color="red" 
+         data-condition="new" data-hp="420">
+      BMW M3 - 2 doors - Petrol - Red - New - 420 HP
+    </div>
+  </div>
+
+
   
 <script src = "script.js"></script>
 <link rel = "stylesheet" href = "style.css">

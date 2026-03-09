@@ -181,45 +181,7 @@ button:active {
   color: #fff;
 }
 
-.table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
 .table tr:hover {
-  background-color: #e9ecef;
+  background-color: #7fc6ff;
 }
 
-/* CAR CARDS */
-.cars-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.car-card {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: 0.3s;
-}
-
-.car-card:hover {
-  transform: translateY(-5px);
-}
-
-.car-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 6px;
-}
-
-.car-card h3 {
-  margin: 10px 0;
-}
-
-.car-card p {
-  color: #555;
-  margin: 4px 0;
-}
