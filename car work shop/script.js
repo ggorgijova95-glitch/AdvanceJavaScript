@@ -23,112 +23,119 @@ let navigationService = {
     }
 }
 navigationService.registerEventListeners();
+
 let usersData = [];
 
-// Function to render table
-function renderTable(cars) {
-  const tableBody = document.getElementById('userTable');
-  tableBody.innerHTML = ''; // Clear previous rows
-  cars.forEach(car => {
-    
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${car.brand}</td>
-      <td>${car.model}</td>
-      <td>${car.type}</td>
-      <td>${car.doors}</td>
-      <td>${car.gasType}</td>
-      <td>${car.color}</td>
-      <td>${car.isNew ? "New" : "Used"}</td>
-      <td>${car.horsepower}</td>
-    `;
-    tableBody.appendChild(row);
-  });
-}
+// Loader
+const loader = document.getElementById("loader");
 
-// Fetch the JSON file
+// Fetch JSON
 async function fetchCars() {
-  try {
-    const response = await fetch('cars.json');
-    const data = await response.json();
-    // JSON file contains an array of car objects
-    usersData = data;
-    console.log(usersData); // Log the data to verify it's loaded correctly
-    // no initial render; table stays empty until a search is made
-  } catch (error) {
-    console.error('Error loading JSON:', error);
-  }
+    loader.style.display = "flex";
+    try {
+        const response = await fetch('cars.json');
+        usersData = await response.json();
+    } catch (err) {
+        console.error(err);
+    } finally {
+        loader.style.display = "none";
+    }
 }
-
-// initialize data on load
 fetchCars();
 
-function searchCars() {
-  const query = document.getElementById('searchInput').value.trim().toLowerCase();
-  const carsTable = document.getElementById('carsTable');
-
-  if (!query) {
-    // if input is empty, just clear the table and hide it
-    renderTable([]);
-    carsTable.style.display = 'none';
-    document.getElementById('wrongInputMessage').style.display = "block"; // show error message
-    return;
-  } else {
-    document.getElementById('wrongInputMessage').style.display = "none";
-  }
-
-  // filtering logic should run here
-  const filteredCars = usersData.filter(car =>
-    car.brand.toLowerCase().includes(query) || car.type.toLowerCase().includes(query)
-  );
-
-  renderTable(filteredCars);
-
- // show table only if results exist
-if (filteredCars.length > 0) {
-  carsTable.style.display = 'table';
-  document.getElementById('wrongInputMessage').style.display = "none"; 
-} else {
-  // length === 0
-  carsTable.style.display = 'none';
-  document.getElementById('wrongInputMessage').style.display = "block"; 
-}
-}
-function applyFilters() {
-
-  const model = document.getElementById("model").value.toLowerCase();
-  const doors = document.getElementById("doors").value;
-  const gasType = document.getElementById("gasType").value;
-  const color = document.getElementById("color").value.toLowerCase();
-  const condition = document.querySelector('input[name="condition"]:checked')?.value;
-  const horsepower = document.getElementById("horsepower").value;
-
-  const carsTable = document.getElementById("carsTable");
-
-  const filteredCars = usersData.filter(car => {
-
-    return (!model || car.model.toLowerCase().includes(model)) &&
-           (!doors || car.doors == doors) &&
-           (!gasType || car.gasType == gasType) &&
-           (!color || car.color.toLowerCase().includes(color)) &&
-           (!condition || (condition === "new" ? car.isNew : !car.isNew)) &&
-           (!horsepower || car.horsepower >= horsepower);
-
-  });
-
-  renderTable(filteredCars);
-
-  if(filteredCars.length > 0){
-      carsTable.style.display = "table";
-  }else{
-      carsTable.style.display = "none";
-  }
-
+// --- Table Search ---
+function renderTable(cars){
+    const tableBody = document.getElementById("userTable");
+    tableBody.innerHTML = "";
+    cars.forEach(car=>{
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${car.type}</td>
+          <td>${car.brand}</td>
+          <td>${car.model}</td>
+          <td>${car.doors}</td>
+          <td>${car.gasType}</td>
+          <td>${car.color}</td>
+          <td>${car.isNew ? "New" : "Used"}</td>
+          <td>${car.horsepower}</td>
+        `;
+        tableBody.appendChild(row);
+    });
 }
 
-// Wire up button
-document.getElementById('searchButton').addEventListener('click', searchCars);
+function searchCars(){
+    const query = document.getElementById("searchInput").value.trim().toLowerCase();
+    const carsTable = document.getElementById("carsTable");
+    if(!query){
+        renderTable([]);
+        carsTable.style.display = "none";
+        document.getElementById("wrongInputMessage").style.display = "block";
+        return;
+    } else {
+        document.getElementById("wrongInputMessage").style.display = "none";
+    }
 
-// Optional: live search as you type
-//document.getElementById('searchInput').addEventListener('input', searchCars);
-document.getElementById("filters")?.addEventListener("input", applyFilters);
+    const filteredCars = usersData.filter(car =>
+        car.brand.toLowerCase().includes(query) || car.type.toLowerCase().includes(query)
+    );
+
+    renderTable(filteredCars);
+    carsTable.style.display = filteredCars.length>0 ? "table" : "none";
+}
+document.getElementById("searchButton").addEventListener("click", searchCars);
+document.getElementById("searchInput").addEventListener("input", searchCars);
+
+// --- Filter Cars ---
+function renderFilterCars(cars){
+    const container = document.getElementById("filterCarsContainer");
+    container.innerHTML = "";
+    if(cars.length===0){
+        container.innerHTML = "<p>No cars found.</p>";
+        return;
+    }
+    cars.forEach(car=>{
+        container.innerHTML += `
+          <div class="card">
+            <h3>${car.brand} ${car.model}</h3>
+            <p><b>Type:</b> ${car.type}</p>
+            <p><b>Doors:</b> ${car.doors}</p>
+            <p><b>Gas Type:</b> ${car.gasType}</p>
+            <p><b>Color:</b> ${car.color}</p>
+            <p><b>Condition:</b> ${car.isNew ? "New" : "Used"}</p>
+            <p><b>Horsepower:</b> ${car.horsepower}</p>
+          </div>
+        `;
+    });
+}
+
+function applyFilters(){
+    loader.style.display = "flex";
+    setTimeout(()=>{
+        const brand = document.getElementById("brand").value.toLowerCase();
+        const model = document.getElementById("model").value.toLowerCase();
+        const doors = document.getElementById("doors").value;
+        const color = document.getElementById("color").value.toLowerCase();
+        const gasType = document.getElementById("gasType").value;
+        const condition = document.querySelector('input[name="condition"]:checked')?.value;
+        const hpMin = document.getElementById("hpMin").value;
+        const hpMax = document.getElementById("hpMax").value;
+
+        const filteredCars = usersData.filter(car=>{
+            if(brand && !car.brand.toLowerCase().includes(brand)) return false;
+            if(model && !car.model.toLowerCase().includes(model)) return false;
+            if(doors && car.doors!=doors) return false;
+            if(color && !car.color.toLowerCase().includes(color)) return false;
+            if(gasType && gasType!="" && car.gasType!==gasType) return false;
+            if(condition && condition!="" && condition !== (car.isNew?"new":"old")) return false;
+            if(hpMin && car.horsepower<hpMin) return false;
+            if(hpMax && car.horsepower>hpMax) return false;
+            return true;
+        });
+
+        loader.style.display = "none";
+        renderFilterCars(filteredCars);
+    }, 300);
+}
+
+// Attach apply button
+document.getElementById("applyFiltersButton").addEventListener("click", applyFilters);
